@@ -2,6 +2,7 @@ import { StyleSheet, Text, useColorScheme, View } from 'react-native'
 import React from 'react'
 import { Slot, Stack } from 'expo-router';
 import { Colors } from '../constants/Colors';
+import { StatusBar } from 'expo-status-bar';
 
 
 const RootLayout = () => {
@@ -13,23 +14,27 @@ const RootLayout = () => {
 
 
   return (
-    <View style={{ flex: 1, }}>
-      {/* <Slot /> */}
-      <Stack
-        screenOptions={{
-          headerStyle: { backgroundColor: theme.navBackground },
-          headerTintColor: theme.iconColor,
-          headerTitleStyle: { fontWeight: 'bold' },
-        }}
-      >
+    <>
 
-        <Stack.Screen name="index" options={{ headerShown: false, title: 'Home' }} />
-        <Stack.Screen name="about" options={{ headerShown: false }} />
-        <Stack.Screen name="contact" options={{ title: 'Contact' }} />
+        <StatusBar value="auto" />    
+        
+        {/* <Slot /> */}
+        <Stack
+            screenOptions={{
+            headerStyle: { backgroundColor: theme.navBackground },
+            headerTintColor: theme.iconColor,
+            headerTitleStyle: { fontWeight: 'bold' },
+            }}
+        >
 
-      </Stack>
-      <Text>Footer</Text>
-    </View>
+            <Stack.Screen name="index" options={{  title: 'Home' }} />
+            <Stack.Screen name="about" options={{ headerShown: false }} />
+            <Stack.Screen name="contact" options={{ title: 'Contact' }} />
+
+        </Stack>
+        <Text>Footer</Text>
+   
+    </>
   )
 }
 

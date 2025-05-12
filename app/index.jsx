@@ -2,20 +2,30 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react';
 import Logo from '../assets/img/logo_light.png';
 import { Link } from 'expo-router';
+// ThemedView component is used to set the background color of the view according to the current color scheme
+import ThemedView from '../components/ThemedView';
+import ThemedLogo from '../components/ThemedLogo';
+import Spacer from '../components/Spacer';
+import ThemedText from '../components/ThemedText';
+
 
 const Home = () => {
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       
-      <Image source={Logo} style={styles.logo} />
+      <ThemedLogo style={styles.logo} />
+      
+      <Spacer />
 
       <Image
         style={{ width: 300, height: 200, borderRadius: 10, marginBottom: 50 }} 
         source={{ uri: 'https://images.wallpapersden.com/image/ws-alps-mountain-5k-dolomites_90583.jpg'}}
       />
 
-      <Text style={styles.title}>Hello React Native</Text>
+      <ThemedText style={styles.title}>Hello React Native</ThemedText>
       <Text style={styles.subTitle}>Best App in 2025.</Text>
+
+      <Spacer />
 
       <Link href="/about" style={styles.btn}>About</Link>
       <Link href="/contact" style={styles.btn}>Contact</Link>
@@ -24,7 +34,7 @@ const Home = () => {
         <Text>This is Card No 1</Text>
       </View>
 
-    </View>
+    </ThemedView>
   )
 }
 
@@ -39,7 +49,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#90e0ef',
     },
     subTitle: {
         marginTop: 10,
