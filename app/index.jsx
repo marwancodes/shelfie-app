@@ -27,8 +27,10 @@ const Home = () => {
 
       <Spacer />
 
+
       <Link href="/about" style={styles.btn}>About</Link>
       <Link href="/contact" style={styles.btn}>Contact</Link>
+      <Link href="/login" style={styles.link}><ThemedText>Login</ThemedText></Link>
 
       <View style={styles.card}>
         <Text>This is Card No 1</Text>
@@ -77,5 +79,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         boxShadow: '4px 4px rgba(0,0,0,0.1)',
         textTransform: 'uppercase',
+    },
+    link: {
+        marginVertical: 10,
+        borderBottomWidth: 1
     },
 })

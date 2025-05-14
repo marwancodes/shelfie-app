@@ -1,5 +1,4 @@
-import { StyleSheet, Text, useColorScheme, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, useColorScheme } from 'react-native'
 import { Slot, Stack } from 'expo-router';
 import { Colors } from '../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
@@ -26,7 +25,8 @@ const RootLayout = () => {
             headerTitleStyle: { fontWeight: 'bold' },
             }}
         >
-
+          
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
             <Stack.Screen name="index" options={{  title: 'Home' }} />
             <Stack.Screen name="about" options={{ headerShown: false }} />
             <Stack.Screen name="contact" options={{ title: 'Contact' }} />
