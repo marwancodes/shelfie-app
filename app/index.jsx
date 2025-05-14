@@ -28,13 +28,18 @@ const Home = () => {
       <Spacer />
 
 
-      <Link href="/about" style={styles.btn}>About</Link>
+      {/* <Link href="/about" style={styles.btn}>About</Link> */}
+
       <Link href="/contact" style={styles.btn}>Contact</Link>
       <Link href="/login" style={styles.link}><ThemedText>Login</ThemedText></Link>
 
-      <View style={styles.card}>
+      <Link href={"/profile"} style={styles.link}><ThemedText>Profile Page</ThemedText></Link>
+      <Link href={"/create"} style={styles.link}><ThemedText>Create Page</ThemedText></Link>
+      <Link href={"/books"} style={styles.link}><ThemedText>Books Page</ThemedText></Link>
+
+      {/* <View style={styles.card}>
         <Text>This is Card No 1</Text>
-      </View>
+      </View> */}
 
     </ThemedView>
   )
