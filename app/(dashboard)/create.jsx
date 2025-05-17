@@ -6,12 +6,73 @@ import ThemedView from "../../components/ThemedView";
 
 const Create = () => {
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={styles.container} safe={true}>
 
       <ThemedText title={true} style={styles.heading}>
         Add a New Book
       </ThemedText>
       <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+      <ThemedText title={true} style={styles.heading}>
+        Add a New Book
+      </ThemedText>
+      <Spacer />
+
 
     </ThemedView>
   )
