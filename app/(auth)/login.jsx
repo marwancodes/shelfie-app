@@ -16,14 +16,25 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
     const { login } = useUser();
 
     const handleSubmit = async () => {
+        setError(null);
+        if (!email || !password) {
+            setError("Please fill in all fields");
+            return;
+        }
+        if (password.length < 8) {
+            setError("Password must be at least 8 characters");
+            return;
+        }
+
         try {
             await login(email, password);
         } catch (error) {
-            
+            setError(error.message);
         }
     }
 
@@ -56,6 +67,13 @@ const Login = () => {
             <Text style={{ color: '#f2f2f2' }}>Login</Text>
         </ThemedButton>
 
+        <Spacer height={20}/>
+        {error &&
+            <ThemedText style={styles.error}>
+                {error}
+            </ThemedText>
+        }
+
         <Spacer height={100}/>
 
         <Link href={"/register"}>
@@ -87,6 +105,15 @@ const styles = StyleSheet.create({
     },
     pressed: {
         opacity: 0.8,
+    },
+    error: {
+        color: Colors.warning,  
+        padding: 10, 
+        backgroundColor: '#f5c1c8', 
+        borderColor: Colors.warning,
+        borderWidth: 1,
+        borderRadius: 6,
+        marginHorizontal: 10
     },
     
 });

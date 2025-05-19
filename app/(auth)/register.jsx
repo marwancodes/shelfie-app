@@ -1,6 +1,7 @@
 import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native'
 import { Link } from 'expo-router';
 import { useState } from 'react';
+import { Colors } from '../../constants/Colors';
 
 // themed components
 import ThemedView from '../../components/ThemedView';
@@ -15,14 +16,28 @@ const Register = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
     const { register } = useUser();
-
+    
     const handleSubmit = async () => {
+        setError(null);
+        if (!email || !password) {
+            setError("Please fill in all fields");
+            return;
+        }
+        if (password.length < 8) {
+            setError("Password must be at least 8 characters");
+            return;
+        }
+        if (!email.includes('@')) {
+            setError("Please enter a valid email");
+            return;
+        }
         try {
             await register(email, password);
         } catch (error) {
-            
+            setError(error.message);
         }
     }
 
@@ -48,11 +63,18 @@ const Register = () => {
             value={password}
             onChangeText={setPassword}
             secureTextEntry
-            />
+        />
 
         <ThemedButton onPress={handleSubmit}>
             <Text style={{ color: '#f2f2f2' }}>Register</Text>
         </ThemedButton>
+
+        <Spacer height={20}/>
+        {error &&
+            <ThemedText style={styles.error}>
+                {error}
+            </ThemedText>
+        }
 
         <Spacer height={100}/>
 
@@ -77,6 +99,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         marginBottom: 30,
+    },
+    error: {
+            color: Colors.warning,  
+            padding: 10, 
+            backgroundColor: '#f5c1c8', 
+            borderColor: Colors.warning,
+            borderWidth: 1,
+            borderRadius: 6,
+            marginHorizontal: 10
     },
     
 });
