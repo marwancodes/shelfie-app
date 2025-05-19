@@ -8,7 +8,7 @@ const ThemedCard = ({ style, ...props }) => {
     const logo = colorScheme === 'dark' ? DarkLogo : LightLogo ; // this will set the logo to the current color scheme of the device, if its not found it will set it to light
 
   return (
-    <Image source={lgo} />
+    <Image source={logo} />
 
   )
 }

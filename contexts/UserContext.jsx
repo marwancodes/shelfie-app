@@ -40,8 +40,10 @@ export const UserProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        // Call your logout API here
-        // await api.logout();
+        await account.deleteSession('current');
+        // This will delete the current session
+        setUser(null);
+        // This will set the user to null
     }
 
     return (
