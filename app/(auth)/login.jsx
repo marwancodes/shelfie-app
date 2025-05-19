@@ -9,6 +9,7 @@ import Spacer from '../../components/Spacer';
 import ThemedText from '../../components/ThemedText';
 import ThemedButton from '../../components/ThemedButton';
 import ThemedTextInput from '../../components/ThemedTextInput';
+import { useUser } from '../../hooks/useUser';
 
 
 const Login = () => {
@@ -16,12 +17,15 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const { user } = useUser();
+
     const handleSubmit = () => {
+        console.log('Current user:', user);
         console.log('Login button pressed', email, password);
     }
 
   return (
-    // TouchableWithoutFeedback to dismiss keyboard
+    // TouchableWithoutFeedback to dismiss keyboard instead of using a button
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ThemedView style={styles.container}>
 

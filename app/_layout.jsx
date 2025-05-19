@@ -2,6 +2,7 @@ import { StyleSheet, Text, useColorScheme } from 'react-native'
 import { Slot, Stack } from 'expo-router';
 import { Colors } from '../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
+import { UserProvider } from '../contexts/UserContext';
 
 
 const RootLayout = () => {
@@ -13,8 +14,7 @@ const RootLayout = () => {
 
 
   return (
-    <>
-
+    <UserProvider>
         <StatusBar value="auto" />    
         
         {/* <Slot /> */}
@@ -37,7 +37,7 @@ const RootLayout = () => {
         </Stack>
         <Text>Footer</Text>
    
-    </>
+    </UserProvider>
   )
 }
 
