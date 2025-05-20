@@ -10,6 +10,7 @@ import ThemedText from '../../components/ThemedText';
 import ThemedButton from '../../components/ThemedButton';
 import ThemedTextInput from '../../components/ThemedTextInput';
 import { useUser } from '../../hooks/useUser';
+// import ThemedLoader from '../../components/ThemedLoader';
 
 
 const Login = () => {
@@ -79,6 +80,8 @@ const Login = () => {
         <Link href={"/register"}>
             <ThemedText style={{ textAlign: 'center' }}>Register Instead</ThemedText>
         </Link>
+
+        {/* <ThemedLoader /> */}
 
         </ThemedView>
     </TouchableWithoutFeedback>
