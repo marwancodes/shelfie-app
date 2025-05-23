@@ -27,8 +27,7 @@ const RootLayout = () => {
             headerTintColor: theme.iconColor,
             headerTitleStyle: { fontWeight: 'bold' },
             }}
-        >
-          
+        > 
 
             <Stack.Screen name="index" options={{  title: 'Home' }} />
             <Stack.Screen name="about" options={{ headerShown: false }} />
