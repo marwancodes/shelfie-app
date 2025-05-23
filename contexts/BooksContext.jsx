@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { databases } from "../lib/appwrite";
+import { databases, client } from "../lib/appwrite";
 import { ID, Permission, Query, Role } from 'react-native-appwrite';
 import { useUser } from '../hooks/useUser';
 
@@ -66,11 +66,30 @@ export const BooksProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        // listens to changes in the database from Appwrite
+        let unsubscribe
+        const channel = `databases.${DATABASE_ID}.collections.${COLLECTION_ID}.documents`;
+
         if (user) {
             fetchBooks();
+
+            unsubscribe = client.subscribe(channel, (response) => {
+                const { events, payload } = response;
+
+                if (events[0].includes('create')) {
+                    setBooks((prevBooks) => [...prevBooks, payload]);
+                    // This will add the new book to the books array
+                }
+            })
         } else {
             setBooks([]);
         }
+
+        return () => {
+            if (unsubscribe) {
+                unsubscribe();
+            }
+        }   
     },[user])
 
     return (
