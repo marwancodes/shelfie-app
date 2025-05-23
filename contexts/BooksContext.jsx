@@ -21,6 +21,7 @@ export const BooksProvider = ({ children }) => {
                 COLLECTION_ID,
                 [
                     Query.equal('userId', user.$id),
+                    Query.orderAsc('$createdAt'),
                 ]
             )
             setBooks(response.documents);
@@ -52,6 +53,9 @@ export const BooksProvider = ({ children }) => {
                     Permission.delete(Role.user(user.$id)),
                 ]
             )
+
+            // Refresh the books again after creating a new book
+            await fetchBooks();
         } catch (error) {
             console.log(error.message)
         }
@@ -66,30 +70,13 @@ export const BooksProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        // listens to changes in the database from Appwrite
-        let unsubscribe
-        const channel = `databases.${DATABASE_ID}.collections.${COLLECTION_ID}.documents`;
 
         if (user) {
             fetchBooks();
-
-            unsubscribe = client.subscribe(channel, (response) => {
-                const { events, payload } = response;
-
-                if (events[0].includes('create')) {
-                    setBooks((prevBooks) => [...prevBooks, payload]);
-                    // This will add the new book to the books array
-                }
-            })
         } else {
             setBooks([]);
         }
-
-        return () => {
-            if (unsubscribe) {
-                unsubscribe();
-            }
-        }   
+  
     },[user])
 
     return (
