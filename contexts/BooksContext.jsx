@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { databases } from "../lib/appwrite";
-import { ID, Permission, Role } from 'react-native-appwrite';
+import { ID, Permission, Query, Role } from 'react-native-appwrite';
 import { useUser } from '../hooks/useUser';
 
 const DATABASE_ID = '683047a8000485d30820';
@@ -16,7 +16,16 @@ export const BooksProvider = ({ children }) => {
     
     const fetchBooks = async () => {
         try {
-            
+            const response = await databases.listDocuments(
+                DATABASE_ID,
+                COLLECTION_ID,
+                [
+                    Query.equal('userId', user.$id),
+                ]
+            )
+            setBooks(response.documents);
+            // This will set the books to the response from the database
+            console.log(response.documents);
         } catch (error) {
             console.error(error.message);
         }
@@ -56,6 +65,13 @@ export const BooksProvider = ({ children }) => {
         }
     }
 
+    useEffect(() => {
+        if (user) {
+            fetchBooks();
+        } else {
+            setBooks([]);
+        }
+    },[user])
 
     return (
         <BooksContext.Provider value={{ books, fetchBooks, fetchBookById, createBook, deleteBook }}>
