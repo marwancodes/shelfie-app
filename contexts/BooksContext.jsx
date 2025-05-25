@@ -32,8 +32,15 @@ export const BooksProvider = ({ children }) => {
         }
     }
 
-    const fetchBookById = async (bookId) => {
+    const fetchBookById = async (id) => {
         try {
+            const response = await databases.getDocument(
+                DATABASE_ID,
+                COLLECTION_ID,
+                id
+            )
+            return response;
+            // This will return the book with the given id
             
         } catch (error) {
             console.error(error.message);
