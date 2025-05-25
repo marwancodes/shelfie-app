@@ -63,6 +63,10 @@ const DashboardLayout = () => {
                     </>
                 ) }}
             />
+            <Tabs.Screen 
+                name="books/[id]"       
+                options={{ href: null }} // This is to prevent the tab from being created for this route
+            />
             
         </Tabs>
     </UserOnly>

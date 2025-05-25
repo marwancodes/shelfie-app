@@ -37,7 +37,7 @@ const RootLayout = () => {
             <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
         
         </Stack>
-        <Text>Footer</Text>
+        <Text style={{ height: 50}}>Footer (Banner Ads)</Text>
 
       </BooksProvider>
     </UserProvider>

@@ -22,12 +22,14 @@ const ThemedView = ({ style, safe = false, ...props }) => {
     // </View>
   )
 
-  const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets(); // This hook returns the safe area insets for the current device, it can be used to add padding to the top and bottom of the view
+  // This is useful for devices with notches or rounded corners, it will add padding to the top and bottom of the view to avoid the notch or rounded corners
 
   return (
         <View 
           style={[
             baseStyle,{
+             backgroundColor: theme.background,
              paddingTop: insets.top,
              paddingBottom: insets.bottom,
             }, style]} 
