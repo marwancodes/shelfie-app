@@ -6,7 +6,7 @@ import { Colors } from '../constants/Colors';
 const ThemedButton = ({ style, ...props }) => {
   return (
     <Pressable
-      style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+      style={({ pressed }) => [styles.btn, pressed && styles.pressed, style]}
       {...props}
     />
   )

@@ -68,9 +68,15 @@ export const BooksProvider = ({ children }) => {
         }
     }
 
-    const deleteBook = async (bookId) => {
+    const deleteBook = async (id) => {
         try {
-            
+            await databases.deleteDocument(
+                DATABASE_ID,
+                COLLECTION_ID,
+                id
+            )
+            // Refresh the books again after deleting a book
+            await fetchBooks();
         } catch (error) {
             console.error(error.message);
         }

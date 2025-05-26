@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { StyleSheet, Text } from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useBooks } from '../../../hooks/useBooks';
 
@@ -11,6 +11,8 @@ import Spacer from '../../../components/Spacer';
 import ThemedCard from '../../../components/ThemedCard';
 import ThemedLoader from '../../../components/ThemedLoader';
 
+import { Colors } from '../../../constants/Colors';
+
 
 const BookDetails = () => {
 
@@ -19,8 +21,17 @@ const BookDetails = () => {
     const { id } = useLocalSearchParams();
     // Here you would typically fetch the book details using the id
 
-    const { fetchBookById } = useBooks();
+    const { fetchBookById, deleteBook } = useBooks();
 
+    const handleDelete = async () => {
+        await deleteBook(id);
+        // After deleting, you might want to redirect or show a success message
+        setBook(null);
+        // For example, you could redirect to the books list
+        router.replace('/books');
+    }
+
+    // Fetch the book details when the component mounts or when the id changes
     useEffect(() => {
         const getBookData = async () => {
             const bookData = await fetchBookById(id);
@@ -29,13 +40,14 @@ const BookDetails = () => {
         getBookData();
     },[id]);
 
+    // If the book is not found, you might want to handle that case
     if (!book) {
-    return (
-      <ThemedView safe={true} style={styles.container}>
-        <ThemedLoader />
-      </ThemedView>
-    )
-  }
+        return (
+            <ThemedView safe={true} style={styles.container}>
+                <ThemedLoader />
+            </ThemedView>
+        )
+    }
 
   return (
     <ThemedView safe={true} style={styles.container}>
@@ -49,6 +61,11 @@ const BookDetails = () => {
 
         <ThemedText>{book.description}</ThemedText>
       </ThemedCard>
+
+      <ThemedButton onPress={handleDelete} style={styles.delete}>
+        <Text style={{ color: '#fff', textAlign: 'center'}} >Delete Book</Text>
+      </ThemedButton>
+
     </ThemedView>
   )
 }
@@ -66,5 +83,12 @@ const styles = StyleSheet.create({
     },
     card: {
         margin: 20
-  }
+  },
+    delete: {
+        marginTop: 40,
+        marginLeft: 20,
+        backgroundColor: Colors.warning,
+        width: 200,
+        alignSelf: "center",
+  },
 })
