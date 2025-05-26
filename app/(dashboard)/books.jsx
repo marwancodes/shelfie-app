@@ -1,7 +1,9 @@
 import { StyleSheet, FlatList, Pressable } from 'react-native'
 import { useBooks } from '../../hooks/useBooks'
 import { Colors } from '../../constants/Colors';
-import { useRouter } from 'expo-router';
+import { useRouter, Link } from 'expo-router';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+
 
 
 import Spacer from "../../components/Spacer"
@@ -9,10 +11,15 @@ import ThemedText from "../../components/ThemedText"
 import ThemedView from "../../components/ThemedView"
 import ThemedCard from "../../components/ThemedCard"
 
+
 const Books = () => {
 
   const { books } = useBooks();
   const router = useRouter();
+
+  const GoToCreate = () => {
+    router.replace('/create');
+  }
 
 
   return (
@@ -23,7 +30,23 @@ const Books = () => {
         Your Reading List
       </ThemedText>
 
+      
+      <Spacer/>
+      { books.length === 0 && (
+        <ThemedView style={{ flex: 1, justifyContent: "center", alignItems: "center", gap: 20 }}>
+          <FontAwesome name="exclamation" size={50} color={Colors.warning} />
+          <ThemedText>
+            You have no books in your reading list.
+          </ThemedText>
+          <Link href={"/create"} style={styles.link}>
+            <ThemedText>Add some!</ThemedText>
+          </Link>
+
+        </ThemedView>
+      )}
       <Spacer />
+      
+      {/* Render the list of books */}
       <FlatList
         data={books}
         keyExtractor={(item) => item.$id}
@@ -71,4 +94,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
   },
+  link: {
+        borderBottomWidth: 1
+    },
 })
